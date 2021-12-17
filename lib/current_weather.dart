@@ -20,15 +20,12 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       margin: EdgeInsets.only(top: 69 - widget.statusBarHeight),
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height - 270,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [
-                Color(0xff00b4d8),
-                Color(0xff0077b6),
-              ]),
-          borderRadius: BorderRadius.only(
+              colors: widget.currentTemp!.colors),
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(30.0),
             bottomRight: Radius.circular(30.0),
           )),
