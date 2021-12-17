@@ -75,8 +75,9 @@ Future<List> fetchData(String lat, String lon) async {
               temp[i]["weather"][0]["main"].toString(), date, sunrise, sunset),
           pop: (temp[i]['pop'] * 100).round(),
           colors: [],
-          time: DateFormat('HH').format(
-              DateTime.fromMillisecondsSinceEpoch(temp[i]['dt'] * 1000)));
+          time: DateFormat('HH').format(DateTime.fromMillisecondsSinceEpoch(
+                  (temp[i]['dt'] + data['timezone_offset']) * 1000)
+              .toUtc()));
       todayWeather.add(hourly);
     }
 
