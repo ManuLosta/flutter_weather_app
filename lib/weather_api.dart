@@ -69,15 +69,16 @@ Future<List> fetchData(String lat, String lon) async {
     List<Weather> todayWeather = [];
     for (var i = 0; i < 31 - date.hour; i++) {
       var temp = data['hourly'];
+      var time = DateTime.fromMillisecondsSinceEpoch(
+              (temp[i]['dt'] + data['timezone_offset']) * 1000)
+          .toUtc();
       var hourly = Weather(
           current: temp[i]["temp"].round(),
           image: findIcon(
-              temp[i]["weather"][0]["main"].toString(), date, sunrise, sunset),
+              temp[i]["weather"][0]["main"].toString(), time, sunrise, sunset),
           pop: (temp[i]['pop'] * 100).round(),
           colors: [],
-          time: DateFormat('HH').format(DateTime.fromMillisecondsSinceEpoch(
-                  (temp[i]['dt'] + data['timezone_offset']) * 1000)
-              .toUtc()));
+          time: DateFormat('HH').format(time));
       todayWeather.add(hourly);
     }
 
